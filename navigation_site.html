@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Navigation Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.2em;
+            font-weight: 300;
+        }
+
+        .section {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 30px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .link-item {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            color: #2d3748;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .link-item:hover::before {
+            left: 100%;
+        }
+
+        .link-item:hover {
+            transform: translateY(-3px);
+            border-color: #667eea;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+        }
+
+        .link-title {
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+            color: #2d3748;
+        }
+
+        .link-url {
+            font-size: 0.9em;
+            color: #667eea;
+            word-break: break-all;
+        }
+
+        .description {
+            font-size: 0.85em;
+            color: #718096;
+            margin-top: 5px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-item {
+            text-align: center;
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: 700;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>My Navigation Hub</h1>
+            <p>Efficient tools, curated resources, one-stop navigation</p>
+            <div style="margin-top: 15px; color: rgba(255,255,255,0.7); font-size: 0.9em;">
+                Designed by CanCan
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🔍 Keyword Research & Demand Analysis</div>
+            <div class="links-grid">
+                <a href="https://www.searchsuggest.tips/?keyword=" class="link-item" target="_blank">
+                    <div class="link-title">Google Suggestions</div>
+                    <div class="link-url">searchsuggest.tips</div>
+                    <div class="description">Get Google search suggestions to discover real user search intent</div>
+                </a>
+                <a href="https://www.toolify.ai/Best-AI-Tools-revenue" class="link-item" target="_blank">
+                    <div class="link-title">Toolify Rankings</div>
+                    <div class="link-url">toolify.ai</div>
+                    <div class="description">AI tools revenue rankings to understand market trends</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🚀 Website Essentials</div>
+            <div class="links-grid">
+                <a href="https://query.domains/" class="link-item" target="_blank">
+                    <div class="link-title">Domain Query</div>
+                    <div class="link-url">query.domains</div>
+                    <div class="description">Bulk domain availability check and registration info</div>
+                </a>
+                <a href="https://spaceship.com" class="link-item" target="_blank">
+                    <div class="link-title">Domain Registration</div>
+                    <div class="link-url">spaceship.com</div>
+                    <div class="description">Professional domain registration service platform</div>
+                </a>
+                <a href="https://github.com" class="link-item" target="_blank">
+                    <div class="link-title">GitHub</div>
+                    <div class="link-url">github.com</div>
+                    <div class="description">Code hosting and version control platform</div>
+                </a>
+                <a href="https://cloudflare.com" class="link-item" target="_blank">
+                    <div class="link-title">Cloudflare</div>
+                    <div class="link-url">cloudflare.com</div>
+                    <div class="description">CDN acceleration and website security protection</div>
+                </a>
+                <a href="https://search.google.com/search-console" class="link-item" target="_blank">
+                    <div class="link-title">Google Search Console</div>
+                    <div class="link-url">search.google.com</div>
+                    <div class="description">Website search data analytics dashboard</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">📊 Competitor Research</div>
+            <div class="links-grid">
+                <a href="https://aitdk.com/" class="link-item" target="_blank">
+                    <div class="link-title">AITDK</div>
+                    <div class="link-url">aitdk.com</div>
+                    <div class="description">Website traffic and keyword data analysis</div>
+                </a>
+                <a href="https://ahrefs.com/free-seo-tools" class="link-item" target="_blank">
+                    <div class="link-title">Ahrefs Free Tools</div>
+                    <div class="link-url">ahrefs.com</div>
+                    <div class="description">Backlink analysis and free SEO tools collection</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🎨 Website Templates</div>
+            <div class="links-grid">
+                <a href="https://github.com/openRin/Rin" class="link-item" target="_blank">
+                    <div class="link-title">Dynamic Blog - Rin</div>
+                    <div class="link-url">github.com/openRin/Rin</div>
+                    <div class="description">Clean and beautiful dynamic blog template</div>
+                </a>
+                <a href="https://github.com/ixartz/Next-JS-Landing-Page-Starter-Template" class="link-item" target="_blank">
+                    <div class="link-title">NextJS Landing Page</div>
+                    <div class="link-url">github.com/ixartz</div>
+                    <div class="description">Free NextJS landing page starter template</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">📰 News & Resources</div>
+            <div class="links-grid">
+                <a href="https://liberating-doll-b8a.notion.site/Reddit-1a8e8aed91b18021839ecba8b74e530b" class="link-item" target="_blank">
+                    <div class="link-title">Reddit Communities</div>
+                    <div class="link-url">notion.site</div>
+                    <div class="description">Curated Reddit community resources collection</div>
+                </a>
+                <a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content?hl=zh-cn" class="link-item" target="_blank">
+                    <div class="link-title">Google SEO Fundamentals</div>
+                    <div class="link-url">developers.google.com</div>
+                    <div class="description">Official Google Search Central SEO guide</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">💰 Business Insights</div>
+            <div class="links-grid">
+                <a href="https://scys.com/articleDetail/xq_topic/1525814845844482" class="link-item" target="_blank">
+                    <div class="link-title">Don't Call Yourself an Indie Developer</div>
+                    <div class="link-url">scys.com</div>
+                    <div class="description">Deep thoughts on indie developer identity recognition</div>
+                </a>
+                <a href="https://scys.com/articleDetail/xq_topic/2858151258225521" class="link-item" target="_blank">
+                    <div class="link-title">AI Programming First Lesson</div>
+                    <div class="link-url">scys.com</div>
+                    <div class="description">Build a business, not an App - Business mindset guide</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-number">6</span>
+                <span class="stat-label">Categories</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">13</span>
+                <span class="stat-label">Tools</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Curated</span>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px; padding: 20px; color: rgba(255,255,255,0.8); font-size: 0.9em;">
+            © 2025 CanCan · Carefully curated, efficient navigation
+        </div>
+    </div>
+
+    <script>
+        // Add page loading animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    section.style.transition = 'all 0.6s ease';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+
+        // Add link click tracking (optional)
+        document.querySelectorAll('.link-item').forEach(link => {
+            link.addEventListener('click', function() {
+                const title = this.querySelector('.link-title').textContent;
+                console.log(`Clicked: ${title}`);
+                // Analytics code can be added here
+            });
+        });
+    </script>
+</body>
+</html>
